@@ -1,8 +1,8 @@
 -- TODO
-DROP TABLE orders_products;
-DROP TABLE orders;
-DROP TABLE products;
-DROP TABLE users;
+DROP TABLE IF EXISTS orders_products;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
