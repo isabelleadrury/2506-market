@@ -1,5 +1,5 @@
 import db from "#db/client";
-
+import { createUser } from "./queries/users";
 await db.connect();
 await seed();
 await db.end();
