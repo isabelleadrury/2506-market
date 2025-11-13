@@ -34,17 +34,6 @@ export async function getOrdersByUserId(id) {
   return orders;
 }
 
-// export async function getOrdersByProductIdAndUserId(productId, userId) {
-//   const sql = `
-// 	SELECT *
-// 	FROM orders_products
-// 	WHERE product_id = $1
-// 	AND user_id = $2
-// 	`;
-//   const { rows: orders } = await db.query(sql, [productId, userId]);
-//   return orders;
-// }
-
 export async function getOrderById(id) {
   const sql = `
 	SELECT *
