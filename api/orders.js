@@ -1,9 +1,9 @@
 import express from "express";
-const router = express.Router();
-export default router;
-
 import { getOrderById, getOrdersByUserId } from "#db/queries/orders";
 import requireUser from "#middleware/requireUser";
+
+const router = express.Router();
+
 router.use(requireUser);
 
 router.get("/", async (req, res) => {
@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
   res.send(orders);
 });
 
-router.params("id", async (req, res, next, id) => {
+router.param("id", async (req, res, next, id) => {
   const order = await getOrderById(id);
   if (!order) return res.status(404).send("Order not found.");
   req.order = order;
@@ -24,3 +24,5 @@ router.get("/:id", (req, res) => {
   }
   res.send(req.order);
 });
+
+export default router;
