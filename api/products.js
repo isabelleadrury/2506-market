@@ -5,7 +5,7 @@ export default router;
 import { getProductById, getProducts } from "#db/queries/products";
 import requireBody from "#middleware/requireBody";
 import requireUser from "#middleware/requireUser";
-import { createOrder } from "#db/queries/orders";
+import { createOrder, getOrdersByProductIdAndUserId } from "#db/queries/orders";
 
 router.get("/", async (req, res) => {
   const products = await getProducts();
@@ -33,3 +33,11 @@ router.post(
     res.status(201).send(order);
   }
 );
+
+router.get("/:id/orders", requireUser, async (req, res) => {
+  const orders = await getOrdersByProductIdAndUserId(
+    req.product.id,
+    req.user.id
+  );
+  res.send(orders);
+});
