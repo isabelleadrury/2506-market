@@ -1,11 +1,10 @@
 import express from "express";
-const router = express.Router();
-export default router;
-
-import { getProductById, getProducts } from "#db/queries/products";
-import requireBody from "#middleware/requireBody";
 import requireUser from "#middleware/requireUser";
+import requireBody from "#middleware/requireBody";
+import { getProductById, getProducts } from "#db/queries/products";
 import { createOrder, getOrdersByProductIdAndUserId } from "#db/queries/orders";
+
+const router = express.Router();
 
 router.get("/", async (req, res) => {
   const products = await getProducts();
@@ -18,9 +17,9 @@ router.param("id", async (req, res, next, id) => {
   req.product = product;
   next();
 });
+
 router.get("/:id", async (req, res) => {
-  const product = req.product;
-  res.send(product);
+  res.send(req.product);
 });
 
 router.post(
@@ -41,3 +40,5 @@ router.get("/:id/orders", requireUser, async (req, res) => {
   );
   res.send(orders);
 });
+
+export default router;
